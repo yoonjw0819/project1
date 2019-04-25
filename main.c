@@ -264,45 +264,110 @@ int main(){
 	printf("\nCheck your input.txt.\n");
 	printf("Your output will be printed in output.txt.\n");
 	printf("Type an integer for the following task.\n");
-	printf("	1 for Encryption with a rotation cipher\n");
-	printf("	2 for Decryption with a rotation cipher\n");
-	printf("	3 for Encryption with a substitution cipher\n");
-	printf("	4 for Decryption with a substitution cipher\n");
+	printf("	1 for Encryption with a rotation cipher, key given\n");
+	printf("	2 for Decryption with a rotation cipher, key given\n");
+	printf("	3 for Encryption with a substitution cipher, key given\n");
+	printf("	4 for Decryption with a substitution cipher, key given\n");
+	printf("	5 for Decryption with a rotation cipher without key\n");
+	printf("	6 for Decryption with a substitution cipher without key\n");
 	int method;
 	scanf("%d",&method);
-	printf("Assign key value by typing an integer.\n");
 	int k;
-	scanf("%d",&k);
+	if (method ==1 ||method==2){
+		printf("Assign key value by typing an integer.\n");
+		scanf("%d",&k);
+	}
+	if (method ==3 ||method==4){
+		printf("Your key is set by this default:\n");
+		printf("QWERTYUIOPASDFGHJKLZXCVBNM\n");
+	}
 	
+	if (method ==1||method==2||method ==3||method==4){
 	//Read each character from input.txt
-	while(!feof(fIn)){
-		fscanf(fIn,"%c",&c);
-		if (c == ' '){
-			fprintf(fOut,"%c",' ');
-		} else if (c == '\n'){
-			fprintf(fOut,"%c",'\n');
-		} else if (c == '.'){
-			fprintf(fOut,"%c",'.');
-		} else if (c == ','){
-			fprintf(fOut,"%c",',');
-		} else if (c == '-'){
-			fprintf(fOut,"%c",'-');
-		} else if (c == '?'){
-			fprintf(fOut,"%c",'?');
-		} else if (c == '!'){
-			fprintf(fOut,"%c",'!');
-		} else {
-			if (method==1){
-				fprintf(fOut,"%c",rEn(c,k));
-			} else if (method==2){
-				fprintf(fOut,"%c",rDE(c,k));
-			} else if (method==3){
-				fprintf(fOut,"%c",sEn(c));
-			} else if (method==4){
-				fprintf(fOut,"%c",sDE(c));
+		while(!feof(fIn)){
+			fscanf(fIn,"%c",&c);
+			if (c == ' '){
+				fprintf(fOut,"%c",' ');
+			} else if (c == '\n'){
+				fprintf(fOut,"%c",'\n');
+			} else if (c == '.'){
+				fprintf(fOut,"%c",'.');
+			} else if (c == ','){
+				fprintf(fOut,"%c",',');
+			} else if (c == '-'){
+				fprintf(fOut,"%c",'-');
+			} else if (c == '?'){
+				fprintf(fOut,"%c",'?');
+			} else if (c == '!'){
+				fprintf(fOut,"%c",'!');
+			} else {
+				if (method==1){
+					fprintf(fOut,"%c",rEn(c,k));
+				} else if (method==2){
+					fprintf(fOut,"%c",rDE(c,k));
+				} else if (method==3){
+					fprintf(fOut,"%c",sEn(c));
+				} else if (method==4){
+					fprintf(fOut,"%c",sDE(c));
+				}
 			}
 		}
 	}
+	
+	if (method==5){
+		for (k=1;k<26;k++){
+			printf("\n\nKey(%d): ",k);
+			fIn = fopen("input.txt", "r");
+			while(!feof(fIn)){
+				fscanf(fIn,"%c",&c);
+				if (c == ' '){
+					printf("%c",' ');
+				} else if (c == '\n'){
+					printf("%c",'\n');
+				} else if (c == '.'){
+					printf("%c",'.');
+				} else if (c == ','){
+					printf("%c",',');
+				} else if (c == '-'){
+					printf("%c",'-');
+				} else if (c == '?'){
+					printf("%c",'?');
+				} else if (c == '!'){
+					printf("%c",'!');
+				} else {
+					printf("%c",rDE(c,k));
+				}
+			}
+		}
+		printf("\nType the correct key: ");
+		scanf("%d",&k);
+		fIn = fopen("input.txt", "r");
+		while(!feof(fIn)){
+			fscanf(fIn,"%c",&c);
+			if (c == ' '){
+				fprintf(fOut,"%c",' ');
+			} else if (c == '\n'){
+				fprintf(fOut,"%c",'\n');
+			} else if (c == '.'){
+				fprintf(fOut,"%c",'.');
+			} else if (c == ','){
+				fprintf(fOut,"%c",',');
+			} else if (c == '-'){
+				fprintf(fOut,"%c",'-');
+			} else if (c == '?'){
+				fprintf(fOut,"%c",'?');
+			} else if (c == '!'){
+				fprintf(fOut,"%c",'!');
+			} else {
+				fprintf(fOut,"%c",rDE(c,k));
+			}
+		}
+		printf("\nCode decryption using the key(%d) has been saved into output.txt\n",k);
+	}
+	
+	
+	
 	fclose(fIn);
+	fclose(fOut);
 }
 
