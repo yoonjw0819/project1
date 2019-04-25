@@ -365,7 +365,125 @@ int main(){
 		printf("\nCode decryption using the key(%d) has been saved into output.txt\n",k);
 	}
 	
-	
+	if (method==6){
+		//Check frequency of alphabets in input.txt
+		int A=0,B=0,C=0,D=0,E=0,F=0,G=0,H=0,I=0,J=0,K=0,L=0,M=0,N=0,O=0,P=0,Q=0,R=0,S=0,T=0,U=0,V=0,W=0,X=0,Y=0,Z=0;
+		fIn = fopen("input.txt", "r");
+		while(!feof(fIn)){
+			fscanf(fIn,"%c",&c);
+			switch(c){
+				case 'A': A+=1;
+				break;
+				case 'B': B+=1;
+				break;
+				case 'C': C+=1;
+				break;
+				case 'D': D+=1;
+				break;
+				case 'E': E+=1;
+				break;
+				case 'F': F+=1;
+				break;
+				case 'G': G+=1;
+				break;
+				case 'H': H+=1;
+				break;
+				case 'I': I+=1;
+				break;
+				case 'J': J+=1;
+				break;
+				case 'K': K+=1;
+				break;
+				case 'L': L+=1;
+				break;
+				case 'M': M+=1;
+				break;
+				case 'N': N+=1;
+				break;
+				case 'O': O+=1;
+				break;
+				case 'P': P+=1;
+				break;
+				case 'Q': Q+=1;
+				break;
+				case 'R': R+=1;
+				break;
+				case 'S': S+=1;
+				break;
+				case 'T': T+=1;
+				break;
+				case 'U': U+=1;
+				break;
+				case 'V': V+=1;
+				break;
+				case 'W': W+=1;
+				break;
+				case 'X': X+=1;
+				break;
+				case 'Y': Y+=1;
+				break;
+				case 'Z': Z+=1;
+				break;
+			}
+		}
+		printf("Finding frequencies of alphabets in input.txt...\n");
+		printf("Frequency of A: %d\n", A);
+		printf("Frequency of B: %d\n", B);
+		printf("Frequency of C: %d\n", C);
+		printf("Frequency of D: %d\n", D);
+		printf("Frequency of E: %d\n", E);
+		printf("Frequency of F: %d\n", F);
+		printf("Frequency of G: %d\n", G);
+		printf("Frequency of H: %d\n", H);
+		printf("Frequency of I: %d\n", I);
+		printf("Frequency of J: %d\n", J);
+		printf("Frequency of K: %d\n", K);
+		printf("Frequency of L: %d\n", L);
+		printf("Frequency of M: %d\n", M);
+		printf("Frequency of N: %d\n", N);
+		printf("Frequency of O: %d\n", O);
+		printf("Frequency of P: %d\n", P);
+		printf("Frequency of Q: %d\n", Q);
+		printf("Frequency of R: %d\n", R);
+		printf("Frequency of S: %d\n", S);
+		printf("Frequency of T: %d\n", T);
+		printf("Frequency of U: %d\n", U);
+		printf("Frequency of V: %d\n", V);
+		printf("Frequency of W: %d\n", W);
+		printf("Frequency of X: %d\n", X);
+		printf("Frequency of Y: %d\n", Y);
+		printf("Frequency of Z: %d\n", Z);
+		
+		//Create two arrays that represents number and alphabet array.
+		int num[]={A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z};
+		char alp[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		
+		//Start Bubblesorting
+		int i,j,temp;
+		char tempChar;
+		for(i=0;i<26-1;i++){//Number of process of comparison is number of index - 1, excluding the comparison by itself.
+			for(j=0;j<26-1;j++){
+				//replace if the array of larger index is greater than the smaller one.
+				if(num[j] < num[j+1]){
+                temp=num[j];
+				tempChar=alp[j];
+                num[j]=num[j+1];
+				alp[j]=alp[j+1];
+                num[j+1]=temp;
+				alp[j+1]=tempChar;
+				}
+			}
+		}
+		
+		//Check if the array is sorted correctly.
+		printf("\n\nCheck sorted arrays.\n");
+		for (i=0;i<=26-1;i++){
+			printf("Index %d:	%c has the frequency of %d\n",i,alp[i],num[i]);
+		}
+		printf("\nKey is created!\n");
+		printf("Matching key with English alphabet frequencies...");
+		//Start Substitution Decryption.
+	}
 	
 	fclose(fIn);
 	fclose(fOut);
