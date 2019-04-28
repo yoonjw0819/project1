@@ -121,7 +121,7 @@ char Num_Alp(int n){
 //Making k+Alp_Num range from 0 to 26.
 int Adj(int x);
 int Adj(int x){
-	while (x<0){
+	while (x<0){ //Adjusting the value of x to avoid errors caused by calculating modulus of negative number.
 		x+=26;
 	}
 	return x;
@@ -287,7 +287,7 @@ int main(){
 		while(!feof(fIn)){
 			fscanf(fIn,"%c",&c);
 			if (c == ' '){
-				fprintf(fOut,"%c",' ');
+				fprintf(fOut,"%c",' '); //manually adding space and symbols. To avoid errors caused by the use of ASCII number.
 			} else if (c == '\n'){
 				fprintf(fOut,"%c",'\n');
 			} else if (c == '.'){
@@ -304,13 +304,13 @@ int main(){
 				fprintf(fOut,"%c",':');
 			} else {
 				if (method==1){
-					fprintf(fOut,"%c",rEn(c,k));
+					fprintf(fOut,"%c",rEn(c,k)); //Rotation Encryption
 				} else if (method==2){
-					fprintf(fOut,"%c",rDE(c,k));
+					fprintf(fOut,"%c",rDE(c,k)); //Rotation Decryption
 				} else if (method==3){
-					fprintf(fOut,"%c",sEn(c));
+					fprintf(fOut,"%c",sEn(c)); //Substitution Encryption
 				} else if (method==4){
-					fprintf(fOut,"%c",sDE(c));
+					fprintf(fOut,"%c",sDE(c)); //Substitution Decryption
 				}
 			}
 		}
@@ -378,7 +378,7 @@ int main(){
 		while(!feof(fIn)){
 			fscanf(fIn,"%c",&c);
 			switch(c){
-				case 'A': A+=1;
+				case 'A': A+=1; //Counting frequencies
 				break;
 				case 'B': B+=1;
 				break;
@@ -560,7 +560,7 @@ int main(){
 				}
 				//Swap.
 				temp=num[i1];
-				tempChar=alpEng[i1];
+				tempChar=alpEng[i1]; //We are swapping the characters displayed for output, so we change alpEng[] instead of alp[]
 				num[i1]=num[i2];
 				alpEng[i1]=alpEng[i2];
 				num[i2]=temp;
@@ -638,7 +638,7 @@ int main(){
 			}
 		}
 	}
-	fclose(fIn);
+	fclose(fIn); //Close the file as the program exit.
 	fclose(fOut);
 }
 //Rotation decryption 1
