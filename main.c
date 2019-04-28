@@ -300,6 +300,8 @@ int main(){
 				fprintf(fOut,"%c",'?');
 			} else if (c == '!'){
 				fprintf(fOut,"%c",'!');
+			} else if (c == ':'){
+				fprintf(fOut,"%c",':');
 			} else {
 				if (method==1){
 					fprintf(fOut,"%c",rEn(c,k));
@@ -334,6 +336,8 @@ int main(){
 					printf("%c",'?');
 				} else if (c == '!'){
 					printf("%c",'!');
+				} else if (c == ':'){
+					printf("%c",':');
 				} else {
 					printf("%c",rDE(c,k));
 				}
@@ -358,6 +362,8 @@ int main(){
 				fprintf(fOut,"%c",'?');
 			} else if (c == '!'){
 				fprintf(fOut,"%c",'!');
+			} else if (c == ':'){
+				fprintf(fOut,"%c",':');
 			} else {
 				fprintf(fOut,"%c",rDE(c,k));
 			}
@@ -480,12 +486,166 @@ int main(){
 		for (i=0;i<=26-1;i++){
 			printf("Index %d:	%c has the frequency of %d\n",i,alp[i],num[i]);
 		}
-		printf("\nKey is created!\n");
-		printf("Matching key with English alphabet frequencies...");
-		//Start Substitution Decryption.
+		//Print key
+		printf("\nKey is generated: ");
+		for (i=0;i<26;i++){
+			printf("%c",alp[i]);
+		}
+		
+		//Match key with English alphabet frequencies.
+		printf("\nMatching key with English alphabet average frequencies: ");
+		char alpEng[]={'E','T','A','O','I','N','S','H','R','D','L','C','U','M','W','F','G','Y','P','B','V','K','J','X','Q','Z'};
+		for (i=0;i<26;i++){
+			printf("%c",alpEng[i]);
+		}
+		printf("\n\n");
+		//Start Substitution Decryption, displaying on cmd.
+		fIn = fopen("input.txt", "r");
+			while(!feof(fIn)){
+				fscanf(fIn,"%c",&c);
+				if (c == ' '){
+					printf("%c",' ');
+				} else if (c == '\n'){
+					printf("%c",'\n');
+				} else if (c == '.'){
+					printf("%c",'.');
+				} else if (c == ','){
+					printf("%c",',');
+				} else if (c == '-'){
+					printf("%c",'-');
+				} else if (c == '?'){
+					printf("%c",'?');
+				} else if (c == '!'){
+					printf("%c",'!');
+				} else if (c == ':'){
+					printf("%c",':');
+				} else {
+					//Check the index for c
+					for (i=0;i<26;i++){
+						if (c==alp[i]){
+							printf("%c",alpEng[i]);
+						}
+					}
+				}
+			}
+		printf("\n");
+		//Allow user to swap characters, can be done by swapping array.
+		while (temp!='N'){
+			printf("\nDo you want to swap characters? (Y/N)\n");
+			
+			scanf("%c",&temp);
+			scanf("%c",&temp); //could not identify the error, the first scanf does not work.
+			char c1,c2;
+			int i1,i2;
+			if (temp=='Y'){
+				printf("Change the alphabet from:\n");
+				printf("Type an alphabet: ");
+				scanf("%c",&c1);
+				scanf("%c",&c1);
+				printf("To: ");
+				scanf("%c",&c2);
+				scanf("%c",&c2);
+				
+				//Change alphabets that are stored in array.
+				//Find index first.
+				for (i=0;i<26;i++){
+					if (alpEng[i]==c1){
+						i1=i;//saves index for the first character the user is changing from
+					}
+				}
+				for (i=0;i<26;i++){
+					if (alpEng[i]==c2){
+						i2=i;//saves index for the second character the user is changing to
+					}
+				}
+				//Swap.
+				temp=num[i1];
+				tempChar=alpEng[i1];
+				num[i1]=num[i2];
+				alpEng[i1]=alpEng[i2];
+				num[i2]=temp;
+				alpEng[i2]=tempChar;
+				
+				printf("Converted from %c to %c.\n",c1,c2);
+				
+				//Array Status
+				printf("\n\nArray Status for substitution cipher\n");
+				for (i=0;i<=26-1;i++){
+					printf("Index %d:	%c\n",i,alpEng[i]);
+				}
+				//Start Substitution Decryption, displaying on cmd.
+				fIn = fopen("input.txt", "r");
+				while(!feof(fIn)){
+					fscanf(fIn,"%c",&c);
+					if (c == ' '){
+						printf("%c",' ');
+					} else if (c == '\n'){
+						printf("%c",'\n');
+					} else if (c == '.'){
+						printf("%c",'.');
+					} else if (c == ','){
+						printf("%c",',');
+					} else if (c == '-'){
+						printf("%c",'-');
+					} else if (c == '?'){
+						printf("%c",'?');
+					} else if (c == '!'){
+						printf("%c",'!');
+					} else if (c == ':'){
+						printf("%c",':');
+					} else {
+						//Check the index for c
+						for (i=0;i<26;i++){
+							if (c==alp[i]){
+								printf("%c",alpEng[i]);
+							}
+						}
+					}
+				}
+				printf("\n");
+			} else if (temp=='N'){
+				//print them in output.txt
+				
+				fIn = fopen("input.txt", "r");
+				while(!feof(fIn)){
+					fscanf(fIn,"%c",&c);
+					if (c == ' '){
+						fprintf(fOut,"%c",' ');
+					} else if (c == '\n'){
+						fprintf(fOut,"%c",'\n');
+					} else if (c == '.'){
+						fprintf(fOut,"%c",'.');
+					} else if (c == ','){
+						fprintf(fOut,"%c",',');
+					} else if (c == '-'){
+						fprintf(fOut,"%c",'-');
+					} else if (c == '?'){
+						fprintf(fOut,"%c",'?');
+					} else if (c == '!'){
+						fprintf(fOut,"%c",'!');
+					} else if (c == ':'){
+						fprintf(fOut,"%c",':');
+					} else {
+						//Check the index for c
+						for (i=0;i<26;i++){
+							if (c==alp[i]){
+								fprintf(fOut,"%c",alpEng[i]);
+							}
+						}
+					}
+				}
+				printf("Your decryption has been saved into output.txt\n");
+			}
+		}
 	}
-	
 	fclose(fIn);
 	fclose(fOut);
 }
-
+//Rotation decryption 1
+//MON MOTHMA: THE DATA BROUGHT TO US BY THE BOTHAN SPIES PINPOINTS THE EXACT LOCATION OF THE EMPEROR'S NEW BATTLE STATION. WE ALSO KNOW THAT THE WEAPON SYSTEMS OF THIS DEATH STAR ARE NOT YET OPERATIONAL. WITH THE IMPERIAL FLEET SPREAD THROUGHOUT THE GALAXY IN A VAIN EFFORT TO ENGAGE US, IT IS RELATIVELY UNPROTECTED. BUT MOST IMPORTANT OF ALL, WE'VE LEARNED THAT THE EMPEROR HIMSELF IS PERSONALLY OVERSEEING THE FINAL STAGES OF THE CONSTRUCTION OF THIS DEATH STAR. MANY BOTHANS DIED TO BRING US THIS INFORMATION.
+//Rotation decryption 2
+//EVERYBODY IS A GENIUS. BUT IF YOU JUDGE A FISH BY ITS ABILITY TO CLIMB A TREE, IT WILL LIVE ITS WHOLE LIFE BELIEVING THAT IT IS STUPID. - ALBERT EINSTEIN
+//Substitution decryption 1
+//DID YOU EVER HEAR THE TRAGEDY OF DARTH PLAGUEIS THE WISE? I THOUGHT NOT. ITS NOT A STORY THE JEDI WOULD TELL YOU. ITS A SITH LEGEND. DARTH PLAGUEIS WAS A DARK LORD OF THE SITH, SO POWERFUL AND SO WISE HE COULD USE THE FORCE TO INFLUENCE THE MIDICHLORIANS TO CREATE LIFE HE HAD SUCH A KNOWLEDGE OF THE DARK SIDE THAT HE COULD EVEN KEEP THE ONES HE CARED ABOUT FROM DYING. THE DARK SIDE OF THE FORCE IS A PATHWAY TO MANY ABILITIES SOME CONSIDER TO BE UNNATURAL. HE BECAME SO POWERFUL THE ONLY THING HE WAS AFRAID OF WAS LOSING HIS POWER, WHICH EVENTUALLY, OF COURSE, HE DID. UNFORTUNATELY, HE TAUGHT HIS APPRENTICE EVERYTHING HE KNEW, THEN HIS APPRENTICE KILLED HIM IN HIS SLEEP. IRONIC. HE COULD SAVE OTHERS FROM DEATH, BUT NOT HIMSELF.
+//Substitution decryption 2
+//A NEW SCIENTIFIC TRUTH DOES NOT TRIUMPH BY CONVINCING ITS OPPONENTS AND MAKING THEM SEE THE LIGHT, BUT RATHER BECAUSE ITS OPPONENTS EVENTUALLY DIE, AND A NEW GENERATION GROWS UP THAT IS FAMILIAR WITH IT. - MAX PLANCK
