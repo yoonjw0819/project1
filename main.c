@@ -345,7 +345,7 @@ int main(){
 		}
 		printf("\nType the correct key: ");
 		scanf("%d",&k);
-		fIn = fopen("input.txt", "r");
+		fIn = fopen("input.txt", "r"); //Have to open the file again, otherwise the reading of input file begins from the end of file.
 		while(!feof(fIn)){
 			fscanf(fIn,"%c",&c);
 			if (c == ' '){
